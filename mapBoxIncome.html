@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title></title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.js'></script>
+    <!-- script geocoder.js allows you to access the search bar -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.31.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+  <!-- Good documentation that allows polygon-popup when you click and changable map styles-->
+  <!-- https://www.mapbox.com/mapbox-gl-js/example/setstyle/ -->
+  <!-- https://www.mapbox.com/mapbox-gl-js/example/polygon-popup-on-click/ -->
+  <!-- http://data.beta.nyc//dataset/9572746e-5fec-4623-889a-eb6eb195101f/resource/0c322985-3c47-4a5f-a4ef-a27a8cf675b2/download/f28d740931ce480092d53307e6e37abageojsonmedianhouseholdincomecounty.geojson -->
+      <!-- http://data.beta.nyc/dataset?res_format=GeoJSON -->
+<style>
+  /*When you click a 'fill' this line lets it know the format of the text box to popup*/
+  .mapboxgl-popup {
+      max-width: 400px;
+      font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+
+</style>
+
+<div id='map'></div>
+
+
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1IjoiamFtZXMxMzUzNSIsImEiOiJjaXV4YnhiOWQwNGlvMnRzNjRva3ZhcTVmIn0.zYxvF6gJ9DXJyiY11QFqhg';
+  var map = new mapboxgl.Map({
+      container: 'map',   // container id
+      style: 'mapbox://styles/mapbox/streets-v9',  //stylesheet location
+      center: [-73.93, 40.745],  // starting position
+      zoom: 10 // starting zoom
+  });
+    //Adds the searchbar. Note, we have to incorporate the script above
+    map.addControl(new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken
+    }));
+  //adds control to zoom/navigate
+  map.addControl(new mapboxgl.NavigationControl());
+
+
+  map.on('load', function () {
+
+    // Add a layer showing the state polygons.
+    map.addLayer({
+        'id': 'incomeOverlay',  //Keep in mind that the id is called boroOverlay
+        'type': 'fill',
+        'source': {
+            'type': 'geojson',
+            'data': 'http://data.beta.nyc//dataset/9572746e-5fec-4623-889a-eb6eb195101f/resource/0c322985-3c47-4a5f-a4ef-a27a8cf675b2/download/f28d740931ce480092d53307e6e37abageojsonmedianhouseholdincomecounty.geojson'
+        },
+        'paint': {
+            'fill-color': 'rgba(255, 170, 0, 0.4)',  //Color for the polygon
+            'fill-outline-color': 'rgba(200, 100, 240, 1)'  //Color for the outline of the polygon fill
+        }
+    });
+});
+
+
+// When a click event occurs near a polygon, open a popup at the location of
+// the feature, with description HTML from its properties.
+  map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['incomeOverlay'] });  //You want to render the id, which is the boroOverlay
+    if (!features.length) {
+          return;
+      }
+    var feature = features[0];
+
+    var popup = new mapboxgl.Popup()
+        .setLngLat(map.unproject(e.point))
+        .setHTML("Average Income=$" + feature.properties.avg_mhi +"| Sum Household Population " +feature.properties.SUM_HH_pop +"| Average time to live=" + feature.properties.avg_ttl + "| Disposable income=$"+feature.properties.disp_inc)
+        .addTo(map);
+});
+
+// Use the same approach as above to indicate that the symbols are clickable
+// by changing the cursor style to 'pointer'.
+  map.on('mousemove', function (e) {
+      var features = map.queryRenderedFeatures(e.point, { layers: ['incomeOverlay'] });
+      map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+  });
+
+
+
+
+</script>
+
+</body>
+</html>
