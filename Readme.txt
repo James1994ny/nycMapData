@@ -6,3 +6,6 @@ I have uploaded the datasets public/geojsonFiles, uploaded thoes files to github
 
 My application uses Node.js, Javascript, Mapbox's API , EJS/Express, Heroku.
 Heroku link: https://evening-brook-64517.herokuapp.com/
+
+
+Created by James Park (James1994ny@gmail.com) during Queens College's Spring 2017 TTP Training Cohert
