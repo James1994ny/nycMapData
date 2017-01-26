@@ -25,36 +25,9 @@
       font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   }
 
-  /*This menu is for the top left map style changing form information*/
-  /*#menu {
-      position: absolute;
-      background: #fff;
-      padding: 10px;
-      font-family: 'Open Sans', sans-serif;
-  }*/
-
 </style>
 
 <div id='map'></div>
-<!--
-<div id='menu'>
-    <input id='basic' type='radio' name='rtoggle' value='basic' checked='checked'>
-    <label for='basic'>basic</label>
-    <input id='streets' type='radio' name='rtoggle' value='streets'>
-    <label for='streets'>streets</label>
-    <input id='bright' type='radio' name='rtoggle' value='bright'>
-    <label for='bright'>bright</label>
-    <input id='light' type='radio' name='rtoggle' value='light'>
-    <label for='light'>light</label>
-    <input id='dark' type='radio' name='rtoggle' value='dark'>
-    <label for='dark'>dark</label>
-    <input id='satellite' type='radio' name='rtoggle' value='satellite'>
-    <label for='satellite'>satellite</label>
-</div> -->
-
-
-
-
 
 
 <script>
@@ -81,7 +54,7 @@
         'type': 'fill',
         'source': {
             'type': 'geojson',
-            'data': 'http://data.beta.nyc//dataset/68c0332f-c3bb-4a78-a0c1-32af515892d6/resource/7c164faa-4458-4ff2-9ef0-09db00b509ef/download/42c737fd496f4d6683bba25fb0e86e1dnycboroughboundaries.geojson'
+            'data': 'https://raw.githubusercontent.com/James1994ny/nycMapData/master/public/geojsonFiles/nycboroJson.geojson'  //Can also use link of original geojson: http://data.beta.nyc//dataset/68c0332f-c3bb-4a78-a0c1-32af515892d6/resource/7c164faa-4458-4ff2-9ef0-09db00b509ef/download/42c737fd496f4d6683bba25fb0e86e1dnycboroughboundaries.geojson
         },
         'paint': {
             'fill-color': 'rgba(0, 250, 154, 0.4)',  //Color for the polygon (0,0,0,opacity)
