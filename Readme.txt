@@ -1,8 +1,7 @@
 NYC data maps
 
-NYC data maps is a website that holds information derived from large datasets.
-Utilized mapbox and open NYC geojson datasets to highlight data.
-I have uploaded the datasets public/geojsonFiles, uploaded thoes files to github and utilized github's https url to reference in my dataset.
+NYC data maps is a website I created that holds information derived from NYC datasets.
+Note:I have uploaded the datasets to github location public/geojsonFiles. I have uploaded the geojson dataset files to github and utilized github's raw geojson https url to re-reference the dataset.
 
 My application uses Node.js, Javascript, Mapbox's API , EJS/Express, Heroku.
 Heroku link: https://evening-brook-64517.herokuapp.com/
