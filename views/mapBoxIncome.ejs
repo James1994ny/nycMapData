@@ -76,7 +76,7 @@
 
     var popup = new mapboxgl.Popup()
         .setLngLat(map.unproject(e.point))
-        .setHTML("Average Income=$" + feature.properties.avg_mhi +"| Sum Household Population " +feature.properties.SUM_HH_pop +"| Average time to live=" + feature.properties.avg_ttl + "| Disposable income=$"+feature.properties.disp_inc)
+        .setHTML("Average Medium Household-Income=$" + feature.properties.avg_mhi +"| Sum Household Population " +feature.properties.SUM_HH_pop + "| Disposable income=$"+feature.properties.disp_inc)
         .addTo(map);
 });
 
